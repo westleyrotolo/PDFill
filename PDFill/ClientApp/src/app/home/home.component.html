@@ -1,0 +1,9 @@
+<h1>Hello, world!</h1>
+<div class="form-group">
+  <input id="commDoc" type="file" class="btnFile" accept=".doc,.docx" (change)="provideDoc($event)">
+  <label for="commDoc">
+    ATTACH DOC|DOCX
+  </label>
+  <span *ngIf="file && file.name" style="display: block;">{{file.name}}</span>
+  <button style="cursor: pointer;" class="btnSave" (click)="confirmComm()" *ngIf="file.name.trim()!=''">SAVE COMM</button>
+</div>
