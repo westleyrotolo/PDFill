@@ -7,7 +7,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { catchError, map, tap, timeout } from 'rxjs/operators';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { ConfirmService } from './modal-confirm.service';
+const BaseUrl: string = "http://localhost:5001/api/Pdf/";
 const httpOptions = {
   headers: new HttpHeaders(
     { 'Content-Type': 'application/json' }
@@ -16,7 +18,9 @@ const httpOptions = {
 @Injectable()
 export class ApiService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, 
+        private loadingService: Ng4LoadingSpinnerService,
+        private confirmService: ConfirmService) {
   }
 
   private handleError<T>(operation = 'operation', notifyError = true, callback?: () => void) {
@@ -39,11 +43,11 @@ export class ApiService {
 
       if (notifyError) {
         
-       // this.confirmService.notify({ message: contentMessage }).then(() => {
+        this.confirmService.notify({ message: contentMessage }).then(() => {
           if (callback) {
             callback();
           }
-      //  });
+       });
         
       }
 
@@ -52,8 +56,8 @@ export class ApiService {
   }
   private startLoading(showLoading = true) {
     if (showLoading) {
-    //  this.loadingService.show();
-    //  this.loadingService.getMessage()
+      this.loadingService.show();
+      this.loadingService.getMessage()
     }
 
   }
@@ -61,7 +65,7 @@ export class ApiService {
   private finishLoading() {
     const timer = Observable.timer(500);
     timer.subscribe(() => {
-     // this.loadingService.hide();
+      this.loadingService.hide();
     });
   
   }
@@ -73,7 +77,7 @@ export class ApiService {
 
 
   postFile(resource: string, body: any, notifyError = true, showLoading = true, callback?: () => void): Observable<any> {
-    const url = "";
+      const url = BaseUrl + resource;
 
     this.startLoading(showLoading);
 
@@ -92,7 +96,7 @@ export class ApiService {
   }
 
   get(resource: string, notifyError = true, showLoading = true, callback?: () => void): Observable<any> {
-    const url = "" 
+      const url = BaseUrl + resource;
     this.startLoading(showLoading);
 
     return this.http
@@ -111,7 +115,7 @@ export class ApiService {
   }
 
   put(resource: string, body: any, notifyError = true, showLoading = true, callback?: () => void): Observable<any> {
-    const url = "base" + resource;
+    const url = BaseUrl + resource;
 
     this.startLoading(showLoading);
 
@@ -129,7 +133,7 @@ export class ApiService {
   }
 
   post(resource: string, body: any, notifyError = true, showLoading = true, callback?: () => void): Observable<any> {
-    const url = "";
+    const url = BaseUrl + resource;
 
     this.startLoading(showLoading);
 

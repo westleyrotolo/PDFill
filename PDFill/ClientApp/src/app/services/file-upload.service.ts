@@ -10,10 +10,10 @@ export class FileUploadService {
     private apiService: ApiService) { }
 
 
-  sendDocument(idComm, docFile): Observable<any> {
+  sendDocument(docFile): Observable<any> {
     const formData = new FormData();
     formData.append('file', docFile);
-    return this.apiService.postFile(`comms/${idComm}/document`, formData);
+    return this.apiService.postFile(`Upload`, formData);
   }
 
 }

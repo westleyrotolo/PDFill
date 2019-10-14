@@ -19,17 +19,16 @@ export class HomeComponent {
   saveDocument(filename) {
     if (this.file != null) {
       this.fileUploadService
-        .sendDocument(filename, this.file)
+        .sendDocument( this.file)
         .toPromise()
         .then(res => {
-          // ok
+          console.log(res);
         });
     }
   }
 
   confirmComm(event?) {
     if (((!isUndefined(event) && event.keyCode == 13) || isUndefined(event)) && this.file != null) {
-      // this.loading = true;
       console.log(this.file);
       this.saveDocument(this.file.name);
     }

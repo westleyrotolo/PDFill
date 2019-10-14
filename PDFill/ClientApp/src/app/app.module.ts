@@ -11,13 +11,15 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiService } from '../app/services/api.service';
 import { FileUploadService } from '../app/services/file-upload.service';
+import { ModalGenericComponent } from './component/modal-generic/modal-generic.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    ModalGenericComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

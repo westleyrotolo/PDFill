@@ -23,10 +23,13 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/platform-server": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@ng-bootstrap/ng-bootstrap": "^5.1.1",
     "@nguniversal/module-map-ngfactory-loader": "^5.0.0-beta.5",
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^3.4.1",
     "core-js": "^2.4.1",
+    "ng4-loading-spinner": "^1.2.3",
+    "ngx-device-detector": "^1.3.11",
     "rxjs": "^5.6.0-forward-compat.5",
     "zone.js": "^0.8.19"
   },

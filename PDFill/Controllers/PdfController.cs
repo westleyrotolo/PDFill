@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,35 @@ namespace PDFill.Controllers
     [ApiController]
     public class PdfController : ControllerBase
     {
+
+        [HttpPost("Upload")]
+        public async Task<ActionResult<FormFill>> UploadPDF(IFormFile file)
+        {
+            var formFill = new FormFill();
+            if (file == null || file.Length == 0)
+                return Content("file not selected");
+
+            var path = Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot",
+                        file.FileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            WordDocument doc = new WordDocument(file.OpenReadStream(), FormatType.Docx);
+            //Get the pattern for regular expression
+            Regex regex = new Regex("{[A-Za-z]+}");
+            var items = doc.FindAll(regex);
+            foreach (var item in items)
+            {
+                formFill.Items.Add(new Item { Key = item.SelectedText });
+            }
+            formFill.Filename = file.FileName;
+            return formFill;
+        }
+
+
        [HttpPost("process")]
        public ActionResult CreatePDF(FormFill formFill)
         {

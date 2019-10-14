@@ -1,0 +1,48 @@
+/* Modal */
+
+
+.modal-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    white-space: pre-line
+  }
+  
+  .icon-enel_close {
+    text-align: right;
+  }
+  
+  .modal-body p {
+    text-align: center;
+    padding-top: 40px;
+    font-size: 1.2em;
+  }
+  
+  .modal-footer {
+    border: none;
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+    padding-top: 0;
+  }
+  
+  .modal-footer>:not(:last-child) {
+  
+  }
+  
+  .modal-footer>:not(:first-child) {
+    margin-left: 0;
+  }
+  
+  .btn_cancel {
+    padding: 6px 30px;
+    font-weight: bold;
+    background-color: white;
+    color: #157da2;
+    min-width: 185px;
+  }
+  
+  .btn_cancel:hover:enabled {
+    background-color: #41b9e6;
+    color: #FFFFFF;
+  }
